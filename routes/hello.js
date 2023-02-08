@@ -2,20 +2,23 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', function (req, res, next) {
+  if (req.session.comments == undefined) {
+    req.session.comments = [];
+  }
   const data = {
     title: 'Hello!',
     message: 'フォームを入力してください。',
-    id: "",
-    pass: ""
+    comments: req.session.comments
   };
   res.render('hello', data);
 });
 
 router.post('/', function (req, res, next) {
+  req.session.comments.unshift(req.body.comment);
   const data = {
     title: 'Hello!',
-    message: req.body.id + "さん(パスワード" + req.body.pass.length + "文字)", id: req.body.id,
-    pass: req.body.pass
+    message: "※コメントの保存",
+    comments: req.session.comments
   };
   res.render("hello", data);
 });
