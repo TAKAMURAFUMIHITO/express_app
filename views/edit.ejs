@@ -1,0 +1,41 @@
+<%- include('header', title) %>
+<h6 class="my-3" id="msg"><%= message %></h6>
+<div class="mb-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>email</th>
+        <th>age</th>
+        <th>update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.age %></td>
+        <td><%= user.updatedAt %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<form action="/db/edit" method="post">
+  <input type="hidden" name="id" id="id" value="<%= user.id %>">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>">
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>">
+  </div>
+  <div class="mb-3">
+    <label for="age" class="form-label">Age</label>
+    <input type="number" class="form-control" id="age" name="age" value="<%= user.age %>">
+  </div>
+  <button type="submit" class="btn btn-primary">送信</button>
+</form>
+<%- include('footer') %>
